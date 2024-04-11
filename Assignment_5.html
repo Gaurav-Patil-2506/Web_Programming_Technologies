@@ -1,0 +1,72 @@
+<html>
+<head>
+    <title>Moving Car</title>
+</head>
+<body>
+    <div
+    id="myDiv"
+    style="height: 300px; 
+    position: absolute; 
+    top: 63px; left: -80px">
+    <img src="car.jpeg" height="200px" id="car"></div><br>
+<div style="height: 100px;
+position: absolute; 
+width: 900px; 
+top: 315px;
+background-color: black;
+position: absolute;
+margin-left: -10px; 
+margin-top: -74px;">
+</div>
+<br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br>
+
+<input type="button" value="Move" onclick="keepMoving()" /><button onclick="stop()">stop</button>
+<br><br>
+
+<input type="button" value="X Axis" />
+<input type="text" width="30px" id="x-result"/><br /><br />
+<input type="button" value="Y Axis" />
+<input type="text" id="y-result"/>
+<script>
+var myLeftVal = -80;
+var myCarTop = 63;
+var intervalArray = new Array();
+function Move()
+{
+    var refToMyDiv = document.getElementById("myDiv");
+    var refXresult = document.getElementById('x-result');
+    var refYresult = document.getElementById('y-result');
+
+        if (myLeftVal < 830)
+        {
+          myLeftVal += 10;
+          refToMyDiv.style.left = myLeftVal + "px";
+          refXresult.value = refToMyDiv.offsetLeft;
+        }else if (myCarTop < 650)
+            {
+                myCarTop += 30;
+                refToMyDiv.style.rotate = 90 + "deg";
+                refToMyDiv.style.top = myCarTop + "px";
+                refYresult.value = refToMyDiv.offsetTop; 
+            }else
+            {
+                refToMyDiv.style.opacity = 0.3;
+                for (var i = 0; i < intervalArray.length; i++)
+                clearInterval(intervalArray[i]);
+            }
+}
+function keepMoving()
+{
+    var interval = setInterval(Move, 100);
+    intervalArray.push(interval);
+}
+function stop()
+{
+    for (var i = 0; i < intervalArray.length; i++)
+    clearInterval(intervalArray[i]);
+}
+</script>
+</body>
+</html>
